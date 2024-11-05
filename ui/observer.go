@@ -1,7 +1,7 @@
 package ui
 
 type Observer interface {
-	Update(data interface{}) // Método para notificar cambios
+	Update(data interface{}) 
 }
 
 type Subject struct {

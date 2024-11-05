@@ -1,7 +1,7 @@
 package main
 
 import (
-	"proyecto/stage/scene/container/models"
+	"parkingLotSimulator/stage/scene/container/models"
 	"sync"
 )
 

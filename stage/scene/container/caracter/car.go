@@ -2,7 +2,7 @@ package caracter
 
 import (
 	"fmt"
-	"math/rand"
+	// "math/rand"
 	"time"
 )
 

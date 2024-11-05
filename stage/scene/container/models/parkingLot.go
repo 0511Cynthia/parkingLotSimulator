@@ -3,8 +3,8 @@ package models
 import (
 	"fmt"
 	"math/rand"
-	"proyecto/stage/scene/container/caracter"
-	"proyecto/ui"
+	"parkingLotSimulator/stage/scene/container/caracter"
+	"parkingLotSimulator/ui"
 	"sync"
 	"time"
 )
@@ -34,14 +34,14 @@ func (e *Estacionamiento) SimularVehiculos(wg *sync.WaitGroup) {
 	for {
 		// Generar vehículos en intervalos de Poisson
 		time.Sleep(time.Duration(rand.ExpFloat64()*1000) * time.Millisecond)
-		vehiculo := caracter.Vehicle{ID: vehiculoID}
+		vehiculo := caracter.Car{ID: vehiculoID}
 		vehiculoID++
 		go e.IntentarEntrar(&vehiculo)
 	}
 }
 
 // Intenta ingresar un vehículo al estacionamiento
-func (e *Estacionamiento) IntentarEntrar(vehiculo *caracter.Vehicle) {
+func (e *Estacionamiento) IntentarEntrar(vehiculo *caracter.Car) {
 	e.acceso <- struct{}{} // Bloquea el canal para controlar la entrada/salida
 	e.mu.Lock()
 	if e.vehiculos >= e.capacidad {
@@ -74,7 +74,7 @@ func (e *Estacionamiento) IntentarEntrar(vehiculo *caracter.Vehicle) {
 }
 
 // Simula la salida de un vehículo y libera el cajón
-func (e *Estacionamiento) SalirVehiculo(vehiculo *caracter.Vehicle, cajon int) {
+func (e *Estacionamiento) SalirVehiculo(vehiculo *caracter.Car, cajon int) {
 	e.acceso <- struct{}{} // Bloquea el acceso para la salida
 	e.mu.Lock()
 	e.cajones[cajon] = false
