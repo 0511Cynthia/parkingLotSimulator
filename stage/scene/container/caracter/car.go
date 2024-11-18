@@ -11,7 +11,7 @@ type Car struct {
 }
 
 // Simula el tiempo que el vehículo está estacionado antes de salir
-func (v *Car) Estacionarse(duracion int) {
+func (v *Car) Park(duracion int) {
 	fmt.Printf("Vehículo %d estacionado por %d segundos\n", v.ID, duracion)
 	time.Sleep(time.Duration(duracion) * time.Second)
 	fmt.Printf("Vehículo %d está saliendo\n", v.ID)
